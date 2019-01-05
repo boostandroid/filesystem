@@ -1,0 +1,49 @@
+cc_library_shared {
+    name: "libboost_filesystem",
+    vendor_available: true,
+    srcs: [
+        "src/codecvt_error_category.cpp",
+        "src/utf8_codecvt_facet.cpp",
+        "src/path.cpp",
+        "src/path_traits.cpp",
+        "src/unique_path.cpp",
+        "src/windows_file_codecvt.cpp",
+        "src/portability.cpp",
+        "src/operations.cpp",
+    ],
+    export_include_dirs: ["include"],
+    header_libs: [
+        "libboost_smart_ptr",
+        "libboost_assert",
+        "libboost_static_assert",
+        "libboost_config",
+        "libboost_core",
+        "libboost_detail",
+        "libboost_container_hash",
+        "libboost_io",
+        "libboost_iterator",
+        "libboost_mpl",
+        "libboost_preprocessor",
+        "libboost_type_traits",
+    ],
+    shared_libs: [
+        "libboost_system",
+    ],
+    target: {
+        android: {
+            cflags: [
+                "-fPIC",
+                "-DPIC",
+                "-fexceptions",
+                "-Wno-error=non-virtual-dtor",
+                "-Wno-error=unused-parameter",
+            ],
+        },
+        not_windows: {
+            cflags: [
+                "-fPIC",
+                "-DPIC",
+            ],
+         },
+    },
+}
